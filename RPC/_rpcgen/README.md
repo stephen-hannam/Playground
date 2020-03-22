@@ -10,6 +10,10 @@ eg: `$ sudo apt install rpcbind`
 
 also add line `avg        22855` to `/etc/rpc`
 
+some distros may have deprecated SunRPC in glibc: eg, Fedora >= 28
+
+eg: on Fedora `$ dnf install libtirpc.x86_64 libtirpc-devel.x86_64`
+
 NB: service may require manually start
 
 ### rpcgen: the protocol compiler
