@@ -2,7 +2,8 @@ from cffi import FFI
 
 ffi = FFI()
 
-lib = ffi.dlopen('./libsomelib.so')
+#lib = ffi.dlopen('./libsomelib.so')
+lib = ffi.dlopen('./somelib.so')
 print('Loaded lib {0}'.format(lib))
 
 # Describe the data type and function prototype to cffi.
@@ -16,7 +17,7 @@ ffi.cdef('''
                 ''')
 
 # Create an array of DataPoint structs and initialize it.
-dps = ffi.new('DataPoint[]', [(2, 2.2), (3, 3.3), (4, 4.4), (5, 5.5)])
+dps = ffi.new('DataPoint[]', [(20, 2.2), (30, 3.3), (40, 4.4), (50, 5.5)])
 
 print('Calling add_data via cffi')
 # Interesting variation: passing invalid arguments to add_data will trigger
