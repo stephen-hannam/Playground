@@ -1,4 +1,5 @@
 gcc -shared -o libsomelib.so -fPIC libsomelib.c somelib.c -lffi
+gcc -shared -o somelib.so -fPIC somelib.c somelib.h -lffi
 
 sudo apt install libffi6 libffi-dev
 
