@@ -1,0 +1,5 @@
+gcc -shared -o libsomelib.so -fPIC libsomelib.c somelib.c -lffi
+
+sudo apt install libffi6 libffi-dev
+
+pip3 install --user cffi
