@@ -1,0 +1,9 @@
+*
+!**/FFI
+!.gitignore
+!*Makefile
+!*README.md
+!*.c
+!*.h
+!*.x
+!*.py
