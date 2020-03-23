@@ -2,8 +2,12 @@
 #include <stdlib.h>
 
 void
-averageprog_1( char* host, int argc, char *argv[])
+averageprog_1( const char* host, int argc, char *argv[])
 {
+   printf("host: %s\n", host);
+   printf("num1: %e\n", strtod(argv[2], NULL));
+   printf("num2: %e\n", strtod(argv[3], NULL));
+   printf("num3: %e\n", strtod(argv[4], NULL));
    CLIENT *clnt;
    double  *result_1, *dp, f;
       char *endptr;
@@ -31,13 +35,13 @@ averageprog_1( char* host, int argc, char *argv[])
       clnt_perror(clnt, "call failed:");
    }
    clnt_destroy( clnt );
-      printf("average = %e\n",*result_1);
+   printf("average = %e\n",*result_1);
 }
 
 
 int main( int argc, char* argv[] )
 {
-   char *host;
+   const char *host = "localhost";
 
    if(argc < 3) {
      printf(
@@ -49,7 +53,7 @@ int main( int argc, char* argv[] )
           printf("Two many input values\n");
           exit(2);
         }
-   host = argv[1];
+   //host = argv[1];
    averageprog_1( host, argc, argv);
    return 0;
 }

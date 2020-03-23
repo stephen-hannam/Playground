@@ -1,11 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 
-int main(int argc, char argv){
+int _main(int argc, char * argv[]){
   printf("hello world\n");
-  //printf("hello %s", argv[1]);
-  if (argv == 'y')
-  {
-    printf("y");
-  }
+  printf("hello %s\n", argv[0]);
+  printf("hello %s", argv[1]);
   return 0;
 }
