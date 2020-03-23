@@ -5,7 +5,7 @@ RPCCOM = rpcgen
 all: $(BIN)
 
 _ravg.so: _ravg.c avg_clnt.c avg_xdr.c avg.h
-	gcc -shared -o _ravg.so -fPIC _ravg.c avg_clnt.c avg_xdr.c avg.h
+	cc -shared -o _ravg.so -fPIC _ravg.c avg_clnt.c avg_xdr.c avg.h
 
 ravg: ravg.o avg_clnt.o avg_xdr.o
 	$(CC) -o ravg ravg.o avg_clnt.o avg_xdr.o
