@@ -32,3 +32,4 @@ $(GEN): avg.x
 
 clean cleanup:
 	rm -f $(GEN) *.o $(BIN)
+	rm -f *.h*
