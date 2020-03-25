@@ -19,14 +19,10 @@ char ** upper_1_svc(input_data * data, struct svc_req *s)
 
     int num_strs = data->num_strs;
 
-    if (num_strs > 0)
-      fprintf(stream, "%s ", data->argv0);
-    if (num_strs > 1)
-      fprintf(stream, "%s ", data->argv1);
-    if (num_strs > 2)
-      fprintf(stream, "%s ", data->argv2);
-    if (num_strs > 3)
-      fprintf(stream, "%s ", data->argv3);
+    for (i = 0; i < num_strs; i++)
+    {
+      fprintf(stream, "%s ", data->argv[i]);
+    }
 
     fflush(stream);
     fclose(stream);

@@ -9,16 +9,16 @@
 *
 */
 
+typedef string str<32>;
+typedef str str_arr[5];
+
 struct input_data {
   int num_strs;
-  string argv0<32>;
-  string argv1<32>;
-  string argv2<32>;
-  string argv3<32>;
+  str_arr argv;
 };
 
 program STRS_PROG {
   version STRS_VERS {
     string UPPER(input_data) = 1; /* procedure number = 1 */
   } = 1;/* version number = 1 */
-} = 0x31234567;/* program number = 0x31234567 */
+} = 22599;
