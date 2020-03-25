@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        fprintf(stderr, "usage: %s hostname <strings>\n", argv[0]);
+        fprintf(stderr, "usage: %s hostname <char *s>\n", argv[0]);
         exit(1);
     }
     server = argv[1];
@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
     }
 
     num_strs = argc - 2;
-    data = (input_data *) malloc(sizeof(input_data *));
+    data = (input_data *) malloc(sizeof(input_data));
     data->num_strs = num_strs;
 
     for (i = 0; i < 5; i++)
     {
-        data->argv[i] = (char *) malloc(sizeof(char *));
+        data->argv[i] = (char *) malloc(16*sizeof(char));
         memset(data->argv[i], 0, sizeof(data->argv[i]));
     }
 
@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
     }
     printf("%s\n", *sresult);
 
+    /* data->argv gets freed by xdr routines - but not allocated for some reason */
     free(data);
     clnt_destroy(cl); /* done with the handle */
     exit(0);
