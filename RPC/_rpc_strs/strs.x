@@ -9,8 +9,16 @@
 *
 */
 
+struct input_data {
+  int num_strs;
+  string argv0<32>;
+  string argv1<32>;
+  string argv2<32>;
+  string argv3<32>;
+};
+
 program STRS_PROG {
   version STRS_VERS {
-    string UPPER(string) = 1; /* procedure number = 1 */
+    string UPPER(input_data) = 1; /* procedure number = 1 */
   } = 1;/* version number = 1 */
 } = 0x31234567;/* program number = 0x31234567 */

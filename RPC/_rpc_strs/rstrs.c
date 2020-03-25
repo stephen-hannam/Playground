@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     char *server;
     char **sresult; /* return value from str_date_1() */
     int i, num_strs;
+    input_data * data;
 
     if (argc < 2)
     {
@@ -31,15 +32,23 @@ int main(int argc, char *argv[])
     }
 
     num_strs = argc - 2;
-    for (i = 2; i < num_strs + 2; i++)
+    data->num_strs = num_strs;
+
+    if (num_strs > 0)
+      data->argv0 = argv[2];
+    if (num_strs > 1)
+      data->argv1 = argv[3];
+    if (num_strs > 2)
+      data->argv2 = argv[4];
+    if (num_strs > 3)
+      data->argv3 = argv[5];
+
+    if ( (sresult = upper_1(data, cl)) == NULL)
     {
-      if ( (sresult = upper_1(&argv[i], cl)) == NULL)
-      {
-          clnt_perror(cl, server);
-          exit(3);
-      }
-      printf("%s\n", *sresult);
+        clnt_perror(cl, server);
+        exit(3);
     }
+    printf("%s\n", *sresult);
 
     clnt_destroy(cl); /* done with the handle */
     exit(0);
