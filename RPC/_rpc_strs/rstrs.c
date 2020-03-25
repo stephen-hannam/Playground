@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     num_strs = argc - 2;
     for (i = 2; i < num_strs + 2; i++)
     {
-      if ( (sresult = upper_1(argv[i], cl)) == NULL)
+      if ( (sresult = upper_1(&argv[i], cl)) == NULL)
       {
           clnt_perror(cl, server);
           exit(3);
