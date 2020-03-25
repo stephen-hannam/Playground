@@ -32,11 +32,18 @@ int main(int argc, char *argv[])
     }
 
     num_strs = argc - 2;
+    data = (input_data *) malloc(sizeof(input_data *));
     data->num_strs = num_strs;
+
+    for (i = 0; i < 5; i++)
+    {
+        data->argv[i] = (char *) malloc(sizeof(char *));
+        memset(data->argv[i], 0, sizeof(data->argv[i]));
+    }
 
     for (i = 0; i < num_strs; i++)
     {
-      data->argv[i] = argv[i+2];
+        data->argv[i] = argv[i+2];
     }
 
     if ( (sresult = upper_1(data, cl)) == NULL)
@@ -46,6 +53,7 @@ int main(int argc, char *argv[])
     }
     printf("%s\n", *sresult);
 
+    free(data);
     clnt_destroy(cl); /* done with the handle */
     exit(0);
 }
