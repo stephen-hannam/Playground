@@ -11,35 +11,48 @@ char ** upper_1_svc(input_data * data, struct svc_req *s)
     static char * _stdout; /* must be static */
     char * one_string;
     size_t size;
-    FILE * stream;
+    FILE * stream1, * stream2;
     char c;
-    int i;
-
-    stream = open_memstream(&one_string, &size);
+    int i,j;
+    char ** _argv;
 
     int num_strs = data->num_strs;
 
+    _argv = (char **) malloc(num_strs*sizeof(char *));
+
     for (i = 0; i < num_strs; i++)
     {
-      fprintf(stream, "%s ", data->argv[i]);
+      _argv[i] = (char *) malloc(16*sizeof(char));
+      strcpy(_argv[i], data->argv[i]);
     }
 
-    fflush(stream);
-    fclose(stream);
+    stream1 = open_memstream(&_stdout, &size);
 
-    stream = open_memstream(&_stdout, &size);
+    for (i = 0; i < num_strs; i++){
+      printf("%s\n", _argv[i]);
+      j = 0;
+      stream2 = open_memstream(&one_string, &size);
+      do
+      {
+        c = _argv[i][j];
+        if (c >= 'a' && c <= 'z')
+          c -= 0x20;
+        printf("here: %c, %d\n", c, j);
+        fprintf(stream2, "%c", c);
+      } while(c != '\0' && j++ < 256);
+      fflush(stream2);
+      fclose(stream2);
+      fprintf(stream1, "%s ", one_string);
+      fflush(stream1);
+      printf("%s\n", _stdout);
+    }
 
-    i = 0;
-    do
-    {
-      c = one_string[i];
-      if (c >= 'a' && c <= 'z')
-        c -= 0x20;
-      fprintf(stream, "%c", c);
-    } while(c != '\0' && i++ < 256);
+    fclose(stream1);
 
-    fflush(stream);
-    fclose(stream);
+    for (i = 0; i < num_strs; i++){
+        free(_argv[i]);
+    }
+    free(_argv);
 
     return(&_stdout);
 }
