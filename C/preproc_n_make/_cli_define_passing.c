@@ -11,14 +11,28 @@
 #define SUFFIX __LINE__
 #endif
 
-#define FUNC int TOKENPASTE2(PREFIX, SUFFIX)(int argc, char ** argv)
+#define FUNC TOKENPASTE2(PREFIX, SUFFIX)
 
-FUNC
+#define DEP1 <stdio.h>
+#define DEP2 <string.h>
+
+#define INC1 #include TOKENPASTE2(DEP1,)
+#define INC2 #include TOKENPASTE2(DEP2,)
+
+INC1
+INC2
+
+int FUNC()
 {
 #ifdef PRT
   printf("%s", STR(PRT));
 #else
 #error "must provide -DPRT=\"value\" in compile options"
 #endif
+  return 0;
+}
+
+int main(int argc, char ** argv){
+  FUNC();
   return 0;
 }
