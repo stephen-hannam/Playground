@@ -6,7 +6,12 @@ int lens[5] = {6,10,6,5,4};
 const char *host = "localhost";
 const char * _argv[5] = {"_main","localhost","12456","1255","126"};
 
-void averageprog_1(  char* host, int argc,  char *argv[])
+typedef struct {
+  int retcode;
+  char * msg;
+} ret_t;
+
+double averageprog_1(  char* host, int argc,  char *argv[])
 {
   printf("host: %s\n", host);
   for(int i = 0; i < argc; i++)
@@ -18,6 +23,7 @@ void averageprog_1(  char* host, int argc,  char *argv[])
     }
     printf("\n");
   }
+
   CLIENT *clnt;
   double  *result_1, *dp, f;
   char *endptr;
@@ -44,14 +50,18 @@ void averageprog_1(  char* host, int argc,  char *argv[])
      clnt_perror(clnt, "call failed:");
   }
   clnt_destroy( clnt );
-  printf("average = %e\n",*result_1);
+  //printf("average = %e\n",*result_1);
+  return(*result_1);
 }
 
 // 6 10 6 5 4
 
-int _main(int argc, char* argv[])
+ret_t _main(int argc, char* argv[])
 {
   char * host;
+  char * str = "hello bitches";
+  ret_t ret;
+  int retcode = 3;
   for(int i = 0; i < argc; i++)
   {
     printf("%d: ", i);
@@ -75,5 +85,8 @@ int _main(int argc, char* argv[])
    host = argv[1];
 
    averageprog_1( host, argc, argv);
-   return 0;
+   //printf("%f\n", ret);
+   ret.retcode = retcode;
+   ret.msg = str;
+   return ret;
 }

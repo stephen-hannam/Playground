@@ -9,11 +9,9 @@ averageprog_1( char* host, int argc, char *argv[])
       char *endptr;
       int i;
    input_data  average_1_arg;
-     average_1_arg.input_data.input_data_val =
-     (double*) malloc(MAXAVGSIZE*sizeof(double));
+     average_1_arg.input_data.input_data_val = (double*) malloc(MAXAVGSIZE*sizeof(double));
      dp = average_1_arg.input_data.input_data_val;
-     average_1_arg.input_data.input_data_len =
-         argc - 2;
+     average_1_arg.input_data.input_data_len = argc - 2;
       for (i=1;i<=(argc - 2);i++) {
         f = strtod(argv[i+1],&endptr);
         printf("value   = %e\n",f);

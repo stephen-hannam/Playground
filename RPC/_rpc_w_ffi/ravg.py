@@ -6,7 +6,14 @@ lib = ffi.dlopen('./_ravg.so')
 print('Loaded lib {0}'.format(lib))
 
 # Describe the data type and function prototype to cffi.
-ffi.cdef("int _main(int argc, char * argv[]);")
+ffi.cdef("""
+typedef struct {
+    int retcode;
+    char * msg;
+} ret_t;
+
+ret_t _main(int argc, char * argv[]);
+""")
 
 print('Calling ravg_main via cffi')
 # Interesting variation: passing invalid arguments to add_data will trigger
@@ -37,4 +44,8 @@ print(num3)
 argv = ffi.new("char *[]", [name, host, num1, num2, num3])
 
 ret = lib._main(len(argv), argv)
-print(ret)
+#ret2 = ffi.cast("char*", ret);
+#ret2 = ffi.cast("float*", ret);
+#print("{0}".format(ret))
+print(ffi.string(ret.msg))
+print(ret.retcode)

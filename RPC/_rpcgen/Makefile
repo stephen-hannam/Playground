@@ -29,4 +29,4 @@ $(GEN): avg.x
 	$(RPCCOM) avg.x
 
 clean cleanup:
-	rm -f $(GEN) *.o $(BIN)
+	rm -f $(GEN)* *.o $(BIN)

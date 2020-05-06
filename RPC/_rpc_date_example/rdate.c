@@ -42,7 +42,8 @@ int main(int argc, char *argv[])
     */
     if ( (sresult = str_date_1(lresult, cl)) == NULL)
     {
-        clnt_perror(cl, server);exit(4);
+        clnt_perror(cl, server);
+        exit(4);
     }
     printf("time on server:\n");
     printf("%s", *sresult);
