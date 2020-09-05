@@ -1,0 +1,23 @@
+Processing text line by line
+
+On the CLI:
+
+$ awk 'PATTERN { ACTION }' file1 [file2 ... ]
+
+PATTERN can be:
+  * regex
+  * boolean condition/s
+  * relational expression (==, !=, >, <, etc)
+  * ternary operator
+  * ranged pattern
+
+print ACTION:
+  -- COLUMNS numbered 1 -> N
+  -- print $0 means 'print the whole line; ie, all columns'
+
+DEREF with $: so $NF derefs the NF built-in var
+
+BUILT-IN vars:
+  -- FS: field separator
+  -- NF: number of fields (on a given line)
+  -- NR: number of row; current row being processed

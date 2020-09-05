@@ -1,0 +1,4 @@
+awk could replace cat and grep without much additional syntax ... if you wanted it to
+
+$ awk '//' afile.txt          <--- same as `cat`
+$ awk '/<pattern>/' afile.txt <--- same as `grep`
